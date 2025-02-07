@@ -1,0 +1,56 @@
+const express = require('express');
+const app = express();
+const router = express.Router();
+const path = require('path');
+
+app.use(express.static(__dirname + '/public'));
+
+var SpotifyWebApi = require('spotify-web-api-node');
+
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: 'CLIENT-ID',
+  clientSecret: 'CLIENT-SECRET',
+  redirectUri: 'http://localhost:9000/callback'
+});
+
+const token = "ACCES-TOKEN";
+
+router.get('/', (req, res, next) => {
+    res.redirect(spotifyApi.createAuthorizeURL([
+        "user-top-read"
+    ]));
+})
+
+// router.get('/callback', (req, res, next) => {
+//     console.log('reqquery', req.query)
+//     const code = req.query.code
+//     spotifyApi.authorizationCodeGrant(code).then((response) => {
+//         res.send(JSON.stringify(response))
+//         spotifyApi.setAccessToken(token);
+//     })
+// })
+
+spotifyApi.setAccessToken(token);
+
+
+spotifyApi.getMyTopTracks().then(function(data) {
+    trackData = data.body.items;
+    trackData.forEach(album => {
+        console.log("'" + album.name + "' - " +  album.artists[0].name);
+        return(trackData);
+})})
+
+app.set('view engine', 'ejs')
+app.set('views', 'view')
+
+app.get('/', onhome);
+
+async function onhome(req, res) {
+    res.render('index', { data: trackData })
+}
+
+app.use('/', router);
+app.listen(9000, () => {
+    console.log('running');
+})

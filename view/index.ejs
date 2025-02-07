@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Candal&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main>
+
+        <div id="containerLP">
+            <img id="lpPlaat" src="images/lp_plaat.png" alt="">
+        </div>
+
+        <section>
+            <% for (var index=0; index < data.length; index++) { %>
+                <section id="contentSection">
+                    <div id="container1">
+                        <a href="<%=data[index].external_urls.spotify%>"><h1>
+                            <%= data[index].name%>
+                        </h1></a>
+                        <h2 src="">
+                            <%= data[index].artists[0].name%>
+                        </h2>
+                    </div>
+                </section>
+                <% } %>
+        </section>
+        <!-- Url saving spot -->
+        <p id="urlSection" name="urlCurrent"></p>
+    </main>
+</body>
+
+<footer>
+    <p>2024 - Stephan Kok - 500803769 - WDD</p>
+</footer>
+
+<script src="/scripts/javascript.js"></script>
+
+</html>
