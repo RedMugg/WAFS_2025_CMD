@@ -3,18 +3,20 @@ const app = express();
 const router = express.Router();
 const path = require('path');
 
+const clientID = process.env.CLIENTID;
+const clientSecret = process.env.CLIENTSECRET;
+const accesToken = process.env.ACCESTOKEN;
+
 app.use(express.static(__dirname + '/public'));
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
-  clientId: 'CLIENT-ID',
-  clientSecret: 'CLIENT-SECRET',
+  clientId: clientID,
+  clientSecret: clientSecret,
   redirectUri: 'http://localhost:9000/callback'
 });
-
-const token = "ACCES-TOKEN";
 
 router.get('/', (req, res, next) => {
     res.redirect(spotifyApi.createAuthorizeURL([
@@ -27,11 +29,11 @@ router.get('/', (req, res, next) => {
 //     const code = req.query.code
 //     spotifyApi.authorizationCodeGrant(code).then((response) => {
 //         res.send(JSON.stringify(response))
-//         spotifyApi.setAccessToken(token);
+//         spotifyApi.setAccessToken(accesToken);
 //     })
 // })
 
-spotifyApi.setAccessToken(token);
+spotifyApi.setAccessToken(accesToken);
 
 
 spotifyApi.getMyTopTracks().then(function(data) {
