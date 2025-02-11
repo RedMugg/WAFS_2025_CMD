@@ -3,6 +3,7 @@ const app = express();
 const router = express.Router();
 const path = require('path');
 
+require('dotenv').config();
 const clientID = process.env.CLIENTID;
 const clientSecret = process.env.CLIENTSECRET;
 const accesToken = process.env.ACCESTOKEN;
@@ -10,6 +11,10 @@ const accesToken = process.env.ACCESTOKEN;
 app.use(express.static(__dirname + '/public'));
 
 var SpotifyWebApi = require('spotify-web-api-node');
+
+console.log(accesToken);
+console.log(clientID);
+console.log(clientSecret);
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
