@@ -1,20 +1,16 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const path = require('path');
-
+const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
+
+//Setup safe codes using a .env file
 const clientID = process.env.CLIENTID;
 const clientSecret = process.env.CLIENTSECRET;
 const accesToken = process.env.ACCESTOKEN;
 
+//Get the right directory
 app.use(express.static(__dirname + '/public'));
-
-var SpotifyWebApi = require('spotify-web-api-node');
-
-console.log(accesToken);
-console.log(clientID);
-console.log(clientSecret);
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
@@ -23,11 +19,15 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:9000/callback'
 });
 
+// Ask the Spotify API to get me the mentioned items in the list below when the get function is called("user-top-read" = "User top 20 tracks")
 router.get('/', (req, res, next) => {
     res.redirect(spotifyApi.createAuthorizeURL([
         "user-top-read"
     ]));
 })
+
+// Uncomment line 35 - 42 and comment line 44 - 56 to get the acces token
+// ######################################################################
 
 // router.get('/callback', (req, res, next) => {
 //     console.log('reqquery', req.query)
@@ -38,9 +38,10 @@ router.get('/', (req, res, next) => {
 //     })
 // })
 
+// Set the right acces token in th API
 spotifyApi.setAccessToken(accesToken);
 
-
+// Get query to gett the top 20 from my spotify account
 spotifyApi.getMyTopTracks().then(function(data) {
     trackData = data.body.items;
     trackData.forEach(album => {
@@ -48,15 +49,19 @@ spotifyApi.getMyTopTracks().then(function(data) {
         return(trackData);
 })})
 
+// Set the right view engine to render .ejs views. (.ejs files are templates using html in this case)
 app.set('view engine', 'ejs')
 app.set('views', 'view')
 
+// Get function when on the root link/url
 app.get('/', onhome);
 
+// Function to render the index.ejs when onhome is called
 async function onhome(req, res) {
     res.render('index', { data: trackData })
 }
 
+// Check if server is running
 app.use('/', router);
 app.listen(9000, () => {
     console.log('running');

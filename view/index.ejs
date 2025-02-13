@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Link the CSS files -->
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- fonts -->
@@ -19,32 +20,63 @@
     <main>
 
         <div id="containerLP">
+            <!-- Credits to Wikipedia: https://nl.wikipedia.org/wiki/Langspeelplaat -->
             <img id="lpPlaat" src="images/lp_plaat.png" alt="">
         </div>
 
-        <section>
-            <% for (var index=0; index < data.length; index++) { %>
-                <section id="contentSection">
-                    <div id="container1">
-                        <a href="<%=data[index].external_urls.spotify%>"><h1>
-                            <%= data[index].name%>
-                        </h1></a>
-                        <h2 src="">
-                            <%= data[index].artists[0].name%>
-                        </h2>
-                    </div>
+        <section id="contentSection">
+            <!-- About me -->
+            <div class="basicInfo">
+                <h1>Stephan Kok</h1>
+                <h2>Enkhuizen | Noord-Holland</h2>
+                <p>Tosti Koning, muziekliefhebber, vriendenvriend, wat wil je nog meer?
+                    Geboren en getogen in Enkhuizen, 24 jaar oud en in zijn Prime zoals sommigen zeggen.
+                    Draait zo nu en dan op een feestje in de weekenden. Gaat erop uit om een rondje te maken in de natuur en daar een paar kiekjes te schieten.
+                </p>
+                <p>
+                    Hieronder kom je meer te weten over mijn leerdoelen van dit semester EN krijg je te zien wat mijn top 20 geluisterde nummers van de afgelopen tijd zijn op Spotify!
+                </p>
+            </div>
+
+            <!-- The Tosti/Grilled Cheese -->
+            <section class="leerdoelenSection">
+                <img class="tosti" onclick="clickTosti()" src="/images/tosti1.png" alt="image of a grilled cheese sandwich">
+                <div class="leerdoelenTekstContainer">
+                    <h1 id="leerdoelTitel">Leerdoelen</h1>
+                    <p id="leerdoelTekst">Kom meer te weten over mijn leerdoelen door te klikken op de tosti!</p>
+                </div>
+            </section>
+
+            <!-- Top 20 area for Spotify API -->
+            <section class="topTwentySection">
+                <h1>My Top 20 songs on Spotify</h1>
+                <ol class="topTwenty">
+                    <% for (var index=0; index < data.length; index++) { %>
+                        <li>
+                            <div id="container1">
+                                <h2 src="">
+                                    <%= data[index].artists[0].name%>
+                                </h2>
+                                <a href="<%=data[index].external_urls.spotify%>"><h1>
+                                    <%= data[index].name%>
+                                </h1></a>
+                            </div>
+                        </li>
+                        <% } %>
+                    </ol>
                 </section>
-                <% } %>
-        </section>
+            </section>
         <!-- Url saving spot -->
         <p id="urlSection" name="urlCurrent"></p>
     </main>
 </body>
 
 <footer>
+    <!-- Credits -->
     <p>2024 - Stephan Kok - 500803769 - WDD</p>
 </footer>
 
+<!-- Call scripts -->
 <script src="/scripts/javascript.js"></script>
 
 </html>

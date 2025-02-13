@@ -3,28 +3,40 @@ body {
   margin: 0;
   background-color: white;
 
+  font-family: "Candal", serif;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1{
+  font-size: 3vw;
+  margin-bottom: 2%;
+}
+
+h2{
+  font-size: 1.5vw;
+
   font-family: "Bodoni Moda", serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
+p {
+  font-weight: 10;
+}
+
 #contentSection {
   display: block;
-  margin-left: 25%;
+  margin-left: 25vw;
   margin-right: 0;
 }
 
-section div {
-  margin: 10% 4% 35% 0%;
-  display: block;
-  font-size: 1.5vw;
-  background-color: white;
-  min-height: 35vh;
-  padding: 5vw;
-  border-radius: 2vw;
-}
-
+/* Vinyl styling */
 #containerLP {
   position: fixed;
   top: 50%;
@@ -35,12 +47,97 @@ section div {
   width: 50vw;
   animation: rotate linear;
   animation-timeline: scroll();
-
+  
   animation-iteration-count: 1;
   animation-fill-mode: both;
-
+  
   -webkit-filter: drop-shadow(8px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+}
+
+/* Basic info section styling */
+.basicInfo {
+  padding: 5%;
+}
+
+/* Leerdoelen styling */
+.leerdoelenSection {
+  display: grid;
+  grid-template-areas: "menu content";
+  grid-template-columns: 1fr 3fr;
+  gap: 5px;
+}
+
+.leerdoelenTekstContainer {
+  padding: 5%;
+  grid-area: content;
+}
+
+.leerdoelenSection h1 {
+  margin-top: 0;
+}
+
+/* Tosti styling */
+.tosti {
+  width: 35vw;
+  margin: auto 0 auto 0;
+  transition: 1s;
+  animation: enlarge 2s infinite;
+  grid-area: menu;
+  vertical-align: center;
+  
+}
+
+.tosti:hover{
+  animation-play-state: paused;
+  
+  -webkit-filter: drop-shadow(5px 5px 0 white)
+  drop-shadow(-5px 5px 0 white)
+  drop-shadow(5px -5px 0 white)
+  drop-shadow(-5px -5px 0 white);
+  
+  filter: drop-shadow(5px 5px 0 white)
+  drop-shadow(-5px 5px 0 white)
+  drop-shadow(5px -5px 0 white)
+  drop-shadow(-5px -5px 0 white);
+}
+
+.tosti:active{
+  transform: scale(0.9);
+}
+
+/* Top twenty styling */
+section section {
+  background-color: rgba(255, 255, 255, .1);
+  max-width: 75vw;
+  padding: 5% 0 5% 5%;
+  border-radius: 25px 0px 0px 25px;
+  margin-top: 10%;
+}
+
+ol h1 {
+  margin-top: 0;
+  font-size: 2vw;
+  font-style: normal;
+  text-transform: uppercase;
+  margin-bottom: 2%;
+}
+
+ol h2 {
+  font-size: 1.5vw;
+  margin-top: 0;
+}
+
+section div:nth-last-of-type(1) {
+  margin: 10% 4% 10% 0%;
+}
+
+
+/* Animations */
+@keyframes enlarge {
+  from{transform: scale(1);}
+  50%{transform: scale(1.05)};
+  to{transform: scale(1)}
 }
 
 @keyframes rotate {
@@ -49,26 +146,42 @@ section div {
   }
 }
 
-h1 {
-  margin-top: 0;
-  font-family: "Candal", serif;
-  font-weight: 400;
-  font-size: 4vw;
-  font-style: normal;
-  text-transform: uppercase;
-  margin-bottom: 2%;
+/* Responsiveness */
+@media (max-width: 720px) {
+  h1 {
+    font-size: 4vw;
+  }
+
+  h2 {
+    font-size: 3vw;
+  }
+
+  p {
+    font-size: 2.5vw;
+  }
+
+  ol h1 {
+    margin-top: 0;
+    font-size: 2vw;
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: 2%;
+  }
+  
+  ol h2 {
+    font-size: 2vw;
+    margin-top: 0;
+  }
+
+.tosti {
+  width: 25vw;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-h2 {
+.leerdoelenSection h1 {
   font-size: 3vw;
-  margin-top: 0;
 }
 
-section div:nth-last-of-type(1) {
-  margin: 10% 4% 10% 0%;
+.leerdoelenSection p {
+  font-size: 2vw;
+}
 }
