@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
     ]));
 })
 
-// Uncomment line 35 - 42 and comment line 44 - 56 to get the acces token
+// Uncomment line 32 - 39 and comment line 41 - 62 to get the acces token
 // ######################################################################
 
 // router.get('/callback', (req, res, next) => {

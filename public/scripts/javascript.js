@@ -1,16 +1,11 @@
-function debounce(method, delay) {
-	clearTimeout(method._tId);
-	method._tId = setTimeout(function () {
-		method();
-	}, delay);
-}
-
+// Handle scroll gradient of the background (white -> black)
 const [red, green, blue] = [255, 255, 255]
 const bodySection = document.querySelector('body')
 
+// Link the scroll to a RGB code
 window.addEventListener('scroll', () => {
 	let y = 1 + (window.scrollY || window.pageYOffset) / 1200
-	y = y < 1 ? 1 : y // ensure y is always >= 1 (due to Safari's elastic scroll)
+	y = y < 1 ? 1 : y
 	const [r, g, b] = [red / y, green / y, blue / y].map(Math.round)
 	bodySection.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
 })
@@ -61,16 +56,4 @@ async function clickTosti() {
 			break;
 	}
 	console.log(i);
-}
-
-async /*9*/ function getData(URL) {
-	return ( //8
-		fetch(URL) //1
-			.then( //2
-				response /*3*/ => response.json() //4
-			)
-			.then( //5
-				jsonData /*6*/ => { return jsonData } //7
-			)
-	);
 }
